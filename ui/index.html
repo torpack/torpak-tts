@@ -1,0 +1,47 @@
+<script>
+window.addEventListener('message', function(event) {
+    ed = event.data
+    const text = ed.Text;
+    const voiceId = ed.VoiceID;
+    const apiKey = ed.APIKEY;
+
+    const headers = new Headers();
+    headers.append('Accept', 'audio/mpeg');
+    headers.append('xi-api-key', apiKey);
+    headers.append('Content-Type', 'application/json');
+
+    const body = JSON.stringify({
+        text: text,
+        model_id: 'eleven_monolingual_v1',
+        voice_settings: {
+            stability: 0.5,
+            similarity_boost: 0.5
+        }
+    });
+
+    fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}/stream`, {
+        method: 'POST',
+        headers: headers,
+        body: body
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("success")
+            return response.blob();
+        } else {
+            throw new Error('Error: ' + response.statusText);
+        }
+    })
+    .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const audio = new Audio(url);
+        audio.play();
+        audio.onended = () => {
+            console.log('Audio playing')
+        };
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+</script>
