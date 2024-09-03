@@ -13,8 +13,5 @@ client_script 'client.lua'
 ui_page 'ui/index.html'
 
 files {
-    'ui/index.html',
-    'ui/server.js',
-    'ui/SpeechClient.js',
-    'ui/SpeechServer.js',
+    'ui/index.html'
 }
