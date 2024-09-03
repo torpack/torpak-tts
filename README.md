@@ -9,4 +9,4 @@ Simple Text to Speech script using ElevenLabs API
 ```
 ### You can find voice ids from [this website](https://api.elevenlabs.io/v1/voices)
 
-## [For Get Support](https://discord.gg/nexusdev)
+## [To Get Support](https://discord.gg/nexusdev)
